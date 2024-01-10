@@ -34,3 +34,43 @@ app.HttpSecurity(http =>
 }
   
 ```
+
+```csharp
+// classe que deve ser passada para  builder.Services.ConfigurarServicosHttpSecurity<ContextDb>(); de onde vai buscar as validaçoes
+ namespace midwareSecurity.Models
+{
+    public class Filter : InternalFilter
+    {
+
+        public void doFilter(HttpContext context, AuthenticationManager _authenticationManager)
+        {
+            var authServ = new ContextDb();
+            var user = authServ.GetUserDetails("123");
+            _authenticationManager.NextAuthDetails = null;
+        }
+    }
+
+
+}
+  
+```
+
+```csharp
+// classe que implementada por um filtro
+namespace midwareSecurity.Models
+{
+    public class Filter : InternalFilter
+    {
+
+        public void doFilter(HttpContext context, AuthenticationManager _authenticationManager)
+        {
+            var authServ = new ContextDb();
+            var user = authServ.GetUserDetails("123");
+            _authenticationManager.NextAuthDetails = null;
+        }
+    }
+
+
+}
+  
+```
