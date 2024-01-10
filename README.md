@@ -12,9 +12,10 @@ app.HttpSecurity(http =>
     ExceptionValidation<Error>().
     RequestPatterns(req => 
         req.
-        Request("/WeatherForecast").authenticate().hasRole().
-        Request("ola").permitAll()
-        .any().permitAll()
+        Request("/painel").authenticate().hasRole("USER").
+        Request("/login").permitAll().
+        Request("/adm").authenticate().hasRole("ADM").
+        any().permitAll()
     ).
     addFilterBefore(typeof(Filter))
 );
