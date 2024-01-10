@@ -57,20 +57,22 @@ app.HttpSecurity(http =>
 
 ```csharp
 // classe que implementada por um filtro
-namespace midwareSecurity.Models
+namespace AspHttpSecurity.core
 {
-    public class Filter : InternalFilter
+    public interface InternalFilter
     {
-
-        public void doFilter(HttpContext context, AuthenticationManager _authenticationManager)
-        {
-            var authServ = new ContextDb();
-            var user = authServ.GetUserDetails("123");
-            _authenticationManager.NextAuthDetails = null;
-        }
+        public void doFilter(HttpContext context, AuthenticationManager authenticationManager);
     }
-
-
 }
-  
+
+```
+
+```csharp
+// classe que implementada por uma exception persolalizada e passada no ExceptionValidation<ErrorHandlingService>().
+namespace AspHttpSecurity.core
+{
+  public interface ErrorHandlingService
+{
+    public object? Error(Exception e);
+}
 ```
